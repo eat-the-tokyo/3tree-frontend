@@ -1,7 +1,7 @@
-import { COLORS as palette } from "../../utils/style/Color/colors";
-import Typograpy from "../../utils/style/Typography";
 import styled from "styled-components";
 import { CardEdit, CardTrash } from "../../assets/icons";
+import { COLORS as palette } from "../../utils/style/Color/colors";
+import Typograpy from "../../utils/style/Typography";
 
 const CardContainer = styled.div`
   width: 100%;
@@ -139,13 +139,14 @@ const EditableCard = ({
   idx,
   ref,
   style,
+  group,
 }) => {
   return (
     <div ref={ref}>
       {onClick ? (
         <CardContainerButton style={style} onClick={onClick}>
           <CardInfoBox>
-            <CardIcon src={icon} />
+            {icon && <CardIcon src={icon} />}
             <CardLabel style={style}>{label}</CardLabel>
           </CardInfoBox>
           <CardToolBox></CardToolBox>
@@ -153,7 +154,7 @@ const EditableCard = ({
       ) : (
         <CardContainer value={isCheck && select == idx} style={style}>
           <CardInfoBox>
-            <CardIcon src={icon} />
+            {icon && <CardIcon src={icon} />}
             <CardLabel>{label}</CardLabel>
           </CardInfoBox>
           <CardToolBox>
@@ -171,7 +172,7 @@ const EditableCard = ({
               <Item>
                 <RadioButton
                   type="radio"
-                  name="radio"
+                  name={group}
                   value={idx}
                   checked={select == idx}
                   onChange={(event) => checkOnClick(event)}

@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { ContainedButton } from "../../../components/button";
-import Typography from "../../../utils/style/Typography/index";
-import { COLORS as palette } from "../../../utils/style/Color/colors";
-import { EmptyCard, EditableCard } from "../../../components/card";
 import { EmptyWallet, MetamaskIcon } from "../../../assets/icons";
-import { DeleteModal } from "../../../components/modal";
-import { addWallet, deleteWallet } from "../../../utils/api/wallets";
+import { ContainedButton } from "../../../components/button";
+import { EditableCard, EmptyCard } from "../../../components/card";
+import { ConfirmModal, DeleteModal } from "../../../components/modal";
+import AddWalletAddress from "../../../components/modal/AddWalletAddress";
 import {
-  receiveTrxs,
   getTrxsLinkInfo,
+  receiveTrxs,
   toggleIsValid,
 } from "../../../utils/api/trxs";
-import Chainlist from "../../SendTokenPage/data/SimpleTokenList";
-import { useTranslation } from "react-i18next";
-import AddWalletAddress from "../../../components/modal/AddWalletAddress";
-import { ConfirmModal } from "../../../components/modal";
-import { useSetRecoilState } from "recoil";
+import { addWallet, deleteWallet } from "../../../utils/api/wallets";
 import { receiveTrxHashState } from "../../../utils/atoms/trxs";
+import { COLORS as palette } from "../../../utils/style/Color/colors";
+import Typography from "../../../utils/style/Typography/index";
+import Chainlist from "../../SendTokenPage/data/SimpleTokenList";
 
 const FullContainer = styled.div`
   width: 100%;
@@ -99,6 +98,8 @@ const WalletComponent = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const setReceiveTrxHash = useSetRecoilState(receiveTrxHashState);
+  const [optionSelected, setOptionSelected] = useState(10);
+  const [showWallet, setShowWallet] = useState(false);
   const { t } = useTranslation();
 
   const Web3 = require("web3");
@@ -212,6 +213,13 @@ const WalletComponent = ({
   const handleSelectChange = (event) => {
     const value = event.target.value;
     setSelect(value);
+  };
+
+  const handleOptionSelectChange = (event) => {
+    const value = event.target.value;
+    console.log(value);
+    value == 11 ? setShowWallet(true) : setShowWallet(false);
+    setOptionSelected(value);
   };
 
   const getTokenOnClick = async () => {
@@ -520,52 +528,86 @@ const WalletComponent = ({
             />
           )}
           <TitleContainer>
-            {walletList?.length > 0 && (
+            <TItleText>Where to receive?</TItleText>
+          </TitleContainer>
+          <ListContainer style={{ marginBottom: "43px" }}>
+            <EditableCard
+              label="social wallet"
+              isEdit={false}
+              isTrash={false}
+              isCheck={true}
+              idx="10"
+              select={optionSelected}
+              checkOnClick={handleOptionSelectChange}
+              group="way"
+            ></EditableCard>
+            <EditableCard
+              label="wallet"
+              isEdit={false}
+              isTrash={false}
+              isCheck={true}
+              idx="11"
+              select={optionSelected}
+              checkOnClick={handleOptionSelectChange}
+              group="way"
+            ></EditableCard>
+          </ListContainer>
+          {showWallet && (
+            <TitleContainer style={{ marginTop: "43px" }}>
+              {walletList?.length > 0 && (
+                <>
+                  <TItleText>Select wallet</TItleText>
+                  <ContainedButton
+                    type="secondary"
+                    styles="filled"
+                    states="default"
+                    size="small"
+                    label={t("manageProfilePage4")}
+                    onClick={walletConnectOnClick}
+                  />
+                </>
+              )}
+            </TitleContainer>
+          )}
+
+          {walletList?.length == 0 ? (
+            showWallet && (
               <>
-                <TItleText>{t("manageProfilePage3")}</TItleText>
+                <EmptyCard icon={EmptyWallet} text={t("selectWalletPage3_3")} />
                 <ContainedButton
-                  type="secondary"
+                  type="primary"
                   styles="filled"
                   states="default"
-                  size="small"
-                  label={t("manageProfilePage4")}
+                  size="large"
+                  label={t("selectWalletPage5")}
                   onClick={walletConnectOnClick}
                 />
               </>
-            )}
-          </TitleContainer>
-          {walletList?.length == 0 ? (
-            <>
-              <EmptyCard icon={EmptyWallet} text={t("selectWalletPage3_3")} />
-              <ContainedButton
-                type="primary"
-                styles="filled"
-                states="default"
-                size="large"
-                label={t("selectWalletPage5")}
-                onClick={walletConnectOnClick}
-              />
-            </>
+            )
           ) : (
             <>
-              <WalletListBox>
-                <ListContainer>
-                  {walletList?.map((wallet, idx) => (
-                    <EditableCard
-                      key={wallet.index}
-                      label={walletConvert(wallet.walletAddress)}
-                      isEdit={false}
-                      isTrash={false}
-                      isCheck={true}
-                      select={select}
-                      idx={idx}
-                      icon={MetamaskIcon}
-                      deleteOnClick={() => deleteOnClick(idx)}
-                      checkOnClick={handleSelectChange}
-                    ></EditableCard>
-                  ))}
-                </ListContainer>
-              </WalletListBox>
+              {showWallet && (
+                <WalletListBox>
+                  <ListContainer>
+                    {walletList?.map((wallet, idx) => (
+                      <EditableCard
+                        key={wallet.index}
+                        label={walletConvert(wallet.walletAddress)}
+                        isEdit={false}
+                        isTrash={false}
+                        isCheck={true}
+                        select={select}
+                        idx={idx}
+                        icon={MetamaskIcon}
+                        deleteOnClick={() => deleteOnClick(idx)}
+                        checkOnClick={handleSelectChange}
+                        group="wallet"
+                      ></EditableCard>
+                    ))}
+                  </ListContainer>
+                </WalletListBox>
+              )}
+
               <ContainedButton
                 type="primary"
                 styles="filled"
