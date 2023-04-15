@@ -21,19 +21,6 @@ const FullContainer = styled.div`
   padding-top: 75px;
 `;
 
-const ButtonContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
-  height: 88px;
-  padding: 16px 20px;
-  position: fixed;
-  bottom: 0px;
-  display: flex;
-  gap: 10px;
-  z-index: 100;
-  backdrop-filter: blur(15px);
-`;
-
 const Dashboard1 = styled.img`
   width: 100%;
   height: 98.9%;
@@ -85,13 +72,6 @@ const IntroPage = () => {
     setLoginAlertModalVisible(false);
   };
 
-  const profileSettingOnClick = () => {
-    if (isLoggedIn) {
-      window.location.href = "/editProfile";
-    } else {
-      setLoginAlertModalVisible(true);
-    }
-  };
   const sendOnClick = () => {
     if (isLoggedIn) {
       window.location.href = "/sendToken";
