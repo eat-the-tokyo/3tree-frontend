@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { LoginHeader } from "../../components/header";
-import { Tooltip } from "../../components/card";
-import { ContainedButton } from "../../components/button";
-import Typography from "../../utils/style/Typography/index";
-import { COLORS as palette } from "../../utils/style/Color/colors";
-import { InfoIcon } from "../../assets/icons";
-import {
-  PigImage,
-  TimerImage,
-  CloudImage,
-  CheckImage,
-} from "../../assets/images";
-import { LoginModal } from "../../components/modal";
-import { getUserInfo, getUserInfoAndProfileDeco } from "../../utils/api/auth";
-import { SelectWallet } from "./components";
-import { getTrxsLinkInfo } from "../../utils/api/trxs";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { getEscrowIdByLink } from "utils/api/new";
+import { InfoIcon } from "../../assets/icons";
+import {
+  CheckImage,
+  CloudImage,
+  PigImage,
+  TimerImage,
+} from "../../assets/images";
+import { ContainedButton } from "../../components/button";
+import { Tooltip } from "../../components/card";
+import { LoginHeader } from "../../components/header";
+import { LoginModal } from "../../components/modal";
+import { getUserInfo, getUserInfoAndProfileDeco } from "../../utils/api/auth";
+import { getTrxsLinkInfo } from "../../utils/api/trxs";
 import { loginState } from "../../utils/atoms/login";
+import { COLORS as palette } from "../../utils/style/Color/colors";
+import Typography from "../../utils/style/Typography/index";
+import { SelectWallet } from "./components";
 
 const FullContainer = styled.div`
   width: 100%;
@@ -255,9 +256,12 @@ const ReceiveTokenPage = () => {
     </TooltipStyle>
   );
 
-  useEffect(() => {
+  useEffect(async () => {
     const pathname = window.location.pathname.split("/");
     const trxsLink = pathname[pathname.length - 1];
+    await getEscrowIdByLink.then((data) => {
+      console.log(data); //escrowId 반환.
+    });
     getTrxsLinkInfo(trxsLink).then(async (data) => {
       let convertedData = data;
       setSenderUser(data.senderUserId);

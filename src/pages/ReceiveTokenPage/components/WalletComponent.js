@@ -100,6 +100,7 @@ const WalletComponent = ({
   const setReceiveTrxHash = useSetRecoilState(receiveTrxHashState);
   const [optionSelected, setOptionSelected] = useState(10);
   const [showWallet, setShowWallet] = useState(false);
+  const [isWrapped, setIsWrapped] = useState(true);
   const { t } = useTranslation();
 
   const Web3 = require("web3");
@@ -119,6 +120,10 @@ const WalletComponent = ({
       getTokenOnClick();
     }
   }, []);
+
+  useEffect(() => {
+    optionSelected == 10 ? setIsWrapped(true) : setIsWrapped(false);
+  }, [optionSelected]);
 
   useEffect(() => {
     if (transactionHash) {
