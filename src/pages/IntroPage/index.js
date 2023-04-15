@@ -1,8 +1,15 @@
+import {
+  dashboard1,
+  dashboard2,
+  dashboard3,
+  dashboard4,
+  dashboard5,
+  dashboard6,
+} from "assets/images";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { ContainedButton } from "../../components/button";
 import { LoginHeader } from "../../components/header";
 import { LoginModal, SingleModal } from "../../components/modal";
 import { loginState, signupState } from "../../utils/atoms/login";
@@ -25,6 +32,42 @@ const ButtonContainer = styled.div`
   gap: 10px;
   z-index: 100;
   backdrop-filter: blur(15px);
+`;
+
+const Dashboard1 = styled.img`
+  width: 100%;
+  height: 98.9%;
+`;
+
+const Dashboard2 = styled.img`
+  cursor: pointer;
+  width: 89%;
+  height: 16.7%;
+`;
+
+const Dashboard3 = styled.img`
+  width: 100%;
+  height: 40%;
+`;
+
+const Dashboard4 = styled.img`
+  width: 100%;
+  height: 157.9%;
+`;
+
+const Dashboard5 = styled.img`
+  cursor: pointer;
+  width: 100%;
+  height: 156.4%;
+`;
+
+const Dashboard6 = styled.img`
+  width: 100%;
+  height: 27.1%;
+  position: absolute;
+  position: sticky;
+  left: 0;
+  bottom: 0;
 `;
 
 const IntroPage = () => {
@@ -91,30 +134,12 @@ const IntroPage = () => {
               )}
             </>
           )}
-          <ButtonContainer>
-            <ContainedButton
-              type="secondary"
-              styles="filled"
-              states="default"
-              size="large"
-              label={
-                <div
-                  style={{
-                    whiteSpace: "nowrap",
-                    paddingLeft: "60px",
-                    paddingRight: "60px",
-                  }}
-                >
-                  {t("introPage3")}
-                </div>
-              }
-              onClick={sendOnClick}
-              style={{
-                width: "auto",
-                whiteSpace: "nowrap",
-              }}
-            />
-          </ButtonContainer>
+          <Dashboard1 src={dashboard1} />
+          <Dashboard2 src={dashboard2} onClick={sendOnClick} />
+          <Dashboard3 src={dashboard3} />
+          <Dashboard4 src={dashboard4} />
+          <Dashboard5 src={dashboard5} />
+          <Dashboard6 src={dashboard6} />
         </FullContainer>
       )}
     </>
