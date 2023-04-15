@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "Montserrat", sans-serif;
+}
+
+/*
+  Montserrat
+ */
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Light.ttf");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-SemiBold.ttf");
+  font-weight: 600;
+}
+
+/*
+  pretendard
+ */
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard/Pretendard-Medium.otf");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard/Pretendard-Bold.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard/Pretendard-Light.otf");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard/Pretendard-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard/Pretendard-SemiBold.otf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-weight: 700;
+  src: url("./RobotoMono/RobotoMono-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-weight: 600;
+  src: url("./RobotoMono/RobotoMono-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-weight: 500;
+  src: url("./RobotoMono/RobotoMono-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-weight: 400;
+  src: url("./RobotoMono/RobotoMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-weight: 300;
+  src: url("./RobotoMono/RobotoMono-Thin.ttf") format("truetype");
+}
