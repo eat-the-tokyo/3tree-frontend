@@ -2,11 +2,11 @@ import axios from "axios";
 import i18next from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ProfileDefault } from "../../assets/icons";
 import { handleTokenExpired } from "../../utils/api/base";
-import { loginState, signupState } from "../../utils/atoms/login";
+import { loginState, signupState, userIdState } from "../../utils/atoms/login";
 import { COLORS as palette } from "../../utils/style/Color/colors";
 import Typograpy from "../../utils/style/Typography";
 import { ContainedButton } from "../button";
@@ -59,6 +59,7 @@ const LoginHeader = ({ onVisible }) => {
   const [userInfo, setUserInfo] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const isSignup = useRecoilValue(signupState);
+  const setUserId = useSetRecoilState(userIdState);
   const { t } = useTranslation();
 
   const loginOnClick = () => {
@@ -84,6 +85,7 @@ const LoginHeader = ({ onVisible }) => {
       .then((data) => {
         returnValue = data.data.resultData;
         setUserInfo(returnValue);
+        setUserId(returnValue.userId);
         const userLanguage = returnValue?.language.toLowerCase().slice(0, 2);
         if (userLanguage === "en") {
           i18next.changeLanguage("en");

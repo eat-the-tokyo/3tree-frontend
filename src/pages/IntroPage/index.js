@@ -12,7 +12,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { LoginHeader } from "../../components/header";
 import { LoginModal, SingleModal } from "../../components/modal";
-import { loginState, signupState } from "../../utils/atoms/login";
+import { loginState, signupState, userIdState } from "../../utils/atoms/login";
 
 const FullContainer = styled.div`
   width: 100%;
@@ -62,6 +62,7 @@ const IntroPage = () => {
   const [loginAlertModalVisible, setLoginAlertModalVisible] = useState(false);
   const [isSignup, setIsSignup] = useRecoilState(signupState);
   const isLoggedIn = useRecoilValue(loginState);
+  const userId = useRecoilValue(userIdState);
   const { t } = useTranslation();
 
   const closeLoginModal = () => {
@@ -119,7 +120,10 @@ const IntroPage = () => {
           <Dashboard3 src={dashboard3} />
           <Dashboard4 src={dashboard4} />
           <Dashboard5 src={dashboard5} />
-          <Dashboard6 src={dashboard6} />
+          <Dashboard6
+            src={dashboard6}
+            onClick={() => window.open(`/@${userId}`)}
+          />
         </FullContainer>
       )}
     </>

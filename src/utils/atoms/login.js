@@ -13,3 +13,8 @@ export const signupState = atom({
   key: "signupState",
   default: false,
 });
+
+export const userIdState = atom({
+  key: "userIdState",
+  default: false,
+});
