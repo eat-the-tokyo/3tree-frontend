@@ -114,14 +114,6 @@ const IntroPage = () => {
                 whiteSpace: "nowrap",
               }}
             />
-            <ContainedButton
-              type="primary"
-              styles="filled"
-              states="default"
-              size="large"
-              label={t("introPage4")}
-              onClick={profileSettingOnClick}
-            />
           </ButtonContainer>
         </FullContainer>
       )}

@@ -2,7 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
 import "./App.css";
-import { IntroPage, SendTokenPage, SettingPage } from "./pages";
+import {
+  IntroPage,
+  ReceiveTokenPage,
+  SendTokenPage,
+  SettingPage,
+} from "./pages";
 import ScrollToTop from "./utils/functions/ScrollTop";
 import { COLORS as palette } from "./utils/style/Color/colors";
 import "./utils/style/Font/font.css";
@@ -36,6 +41,10 @@ function App() {
                 <Route exact path="/" element={<IntroPage />} />
                 <Route path="/sendToken" element={<SendTokenPage />} />
                 <Route path="/settings" element={<SettingPage />} />
+                <Route
+                  path="/receiveToken/:key"
+                  element={<ReceiveTokenPage />}
+                />
               </Routes>
             </WebAppContainer>
           </BodyInner>
