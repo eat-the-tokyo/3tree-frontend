@@ -9,7 +9,7 @@ import "./utils/style/Font/font.css";
 
 const BodyInner = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   min-height: 100vh;
   background-color: ${palette.background};
