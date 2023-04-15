@@ -81,6 +81,10 @@ const IntroPage = () => {
     }
   };
 
+  const receiveOnClick = () => {
+    window.location.href = "/receiveToken/###";
+  };
+
   useEffect(() => {
     localStorage.setItem("language", "en");
   });
@@ -118,7 +122,7 @@ const IntroPage = () => {
           <Dashboard1 src={dashboard1} />
           <Dashboard2 src={dashboard2} onClick={sendOnClick} />
           <Dashboard3 src={dashboard3} />
-          <Dashboard4 src={dashboard4} />
+          <Dashboard4 src={dashboard4} onClick={receiveOnClick} />
           <Dashboard5 src={dashboard5} />
           <Dashboard6
             src={dashboard6}

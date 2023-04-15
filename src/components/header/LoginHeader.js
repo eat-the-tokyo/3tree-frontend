@@ -32,6 +32,8 @@ const InnerContainer = styled.div`
 
   p {
     ${Typograpy.Caption1}
+    position: absolute;
+    right: 68px;
   }
 `;
 
@@ -128,7 +130,7 @@ const LoginHeader = ({ onVisible }) => {
         <LogoContainer>3TREE</LogoContainer>
         {isLoggedIn ? (
           <>
-            <p style={{ marginLeft: "280px" }}>@{userInfo?.userId}</p>
+            <p>@{userInfo?.userId}</p>
             <ProfileButton
               img={userInfo?.profileImg}
               onClick={profileImgOnClick}
