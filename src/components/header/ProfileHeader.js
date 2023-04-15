@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
-import { COLORS as palette } from "../../utils/style/Color/colors";
-import { IconButton, TextButton } from "../button";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { CopyPivot } from "../../components/modal";
+import { TextButton } from "../button";
 
 const HeaderContainer = styled.div`
   width: 100%;

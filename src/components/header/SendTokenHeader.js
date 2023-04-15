@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { ChevronLeft } from "../../assets/icons";
 import { COLORS as palette } from "../../utils/style/Color/colors";
 import Typograpy from "../../utils/style/Typography";
 import { IconButton, TextButton } from "../button";
-import { ChevronLeft, ExternalLink } from "../../assets/icons";
-import { useTranslation } from "react-i18next";
 
 const HeaderContainer = styled.div`
   width: 100%;
