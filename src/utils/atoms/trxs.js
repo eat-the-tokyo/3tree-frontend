@@ -7,7 +7,7 @@ export const receiveTrxHashState = atom({
 
 export const hashState = atom({
   key: "hashState",
-  default: false,
+  default: "",
 });
 
 export const isWrappedState = atom({

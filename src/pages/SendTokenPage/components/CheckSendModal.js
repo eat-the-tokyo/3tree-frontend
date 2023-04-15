@@ -2,7 +2,7 @@ import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { getHashByEmail } from "utils/api/new";
 import { hashState } from "utils/atoms/trxs";
@@ -122,7 +122,7 @@ const LoginModalInner = (
   const [transactionStatus, setTransactionStatus] = useState(null);
   const [escrowId, setEscrowId] = useState();
   const [expiredDateResult, setExpiredDateResult] = useState();
-  const setHashState = useSetRecoilState(hashState);
+  const [hash, setHash] = useRecoilState(hashState);
   const { library } = useWeb3React();
 
   let ABI = [
@@ -462,9 +462,9 @@ const LoginModalInner = (
   } else if (networkId == 137) {
     rpcURL = process.env.REACT_APP_POLYGON_URL;
   } else if (networkId == 11155111) {
-    rpcURL = process.env.REACT_APP_POLYGON_URL;
+    rpcURL = process.env.REACT_APP_MUMBAI_URL;
   } else if (networkId == 80001) {
-    rpcURL = process.env.REACT_APP_POLYGON_URL;
+    rpcURL = process.env.REACT_APP_SEPOLIA_URL;
   }
 
   let metamaskProvider = "";
@@ -548,7 +548,7 @@ const LoginModalInner = (
   const sendOnClick = async () => {
     document.body.style.overflow = "auto";
 
-    if (currency == "USDC" || currency == "USDT") {
+    if (currency == "USDC" || currency == "USDT" || currency == "SepoliaETH") {
       let minABI = [
         // balanceOf
         {
@@ -617,53 +617,45 @@ const LoginModalInner = (
           setLoading(true);
         } else {
           const tempSigner = await tempProvider.getSigner();
-          let tempContract = new ethers.Contract(
-            tokenInfo.address,
-            minABI,
+          let tempContract = new ethers.Contract(0, minABI, tempSigner);
+          let escrowContract = new ethers.Contract(
+            process.env.REACT_APP_SEPOLIA_CONTRACT_ADDRESS,
+            ABI,
             tempSigner
           );
 
-          await getHashByEmail(receiver).then(async (data) => {
-            setHashState(data);
-          });
+          await getHashByEmail(receiver)
+            .then(async (data) => {
+              setHash(data);
+              console.log(data);
+            })
+            .then(async () => {
+              const input = {
+                senderSnsId: receiver,
+                tokenAddress: process.env.REACT_APP_SEPOLIA_CONTRACT_ADDRESS,
+                amount: ethers.utils.parseEther(amount),
+                expiration: Math.floor(Date.now(), 1000) + 86400,
+                wrappedType: "w" + tokenInfo.name,
+                signature: hash,
+              };
 
-          await tempContract.functions
-            .transfer(
-              process.env.REACT_APP_3TREE_ADDRESS,
-              web3.utils.toHex(
-                Number(amount) * Math.pow(10, tokenInfo.decimals)
-              )
-            )
-            .then(async (transaction) => {
-              console.log("Transaction hash:", transaction.hash);
-              setLoading(true);
-              await transaction.wait().then(async (receipt) => {
-                console.log("Transaction receipt:", receipt);
-                if (receipt.status === 1) {
-                  await sendTrxs(
-                    address,
-                    "metamask",
-                    "google",
-                    receiver,
-                    currency,
-                    amount,
-                    transaction.hash,
-                    1234,
-                    setExpiredDate(),
-                    tokenInfo.address,
-                    networkId
-                  ).then((data) => {
-                    setFinalLink(data.linkKey);
-                    setExpired(data.expiredAt);
-                    setLoading(false);
+              await escrowContract.functions
+                .createEscrowFromHotWallet(input, { value: input.amount })
+                .then(async (transaction) => {
+                  console.log("Transaction hash:", transaction.hash);
+                  setLoading(true);
+                  await transaction.wait().then(async (receipt) => {
+                    console.log("Transaction receipt:", receipt);
+                    if (receipt.status === 1) {
+                      setLoading(false);
+                      setStepStatus(stepStatus + 1);
+                      onClose();
+                    } else if (receipt.status !== undefined) {
+                      setLoading(false);
+                      setFailed(true);
+                    }
                   });
-                  setStepStatus(stepStatus + 1);
-                  onClose();
-                } else if (receipt.status !== undefined) {
-                  setLoading(false);
-                  setFailed(true);
-                }
-              });
+                });
             });
         }
       }

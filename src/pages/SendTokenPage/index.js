@@ -249,6 +249,7 @@ const SendTokenPage = () => {
 
   const rightOnClick = () => {
     if (isMobileDevice()) {
+      console.log("he");
       if (stepStatus < StepList.length) {
         if (stepStatus == 1) {
           setModalVisible(true);
@@ -259,6 +260,7 @@ const SendTokenPage = () => {
         setFinalModalVisible(true);
       }
     } else {
+      console.log(stepStatus);
       if (stepStatus < StepList.length) {
         setStepStatus(stepStatus + 1);
       } else {
