@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./App.css";
 import {
   IntroPage,
+  ProfilePage,
   ReceiveTokenPage,
   SendTokenPage,
   SettingPage,
@@ -45,6 +46,7 @@ function App() {
                   path="/receiveToken/:key"
                   element={<ReceiveTokenPage />}
                 />
+                <Route path="/@:id" element={<ProfilePage />} />
               </Routes>
             </WebAppContainer>
           </BodyInner>
