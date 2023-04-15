@@ -254,7 +254,7 @@ const Step3 = ({ expired, finalLink }) => {
     const day = Number(newDateArr[2]) + 3;
     const year = newDateArr[3];
     const time = newDateArr[4].slice(0, 5);
-    return time + " on " + month + " " + day + ", " + year;
+    return "Until " + time + " on " + month + " " + day + ", " + year;
   };
 
   return (
