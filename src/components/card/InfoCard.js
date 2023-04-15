@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Typography from "../../utils/style/Typography/index";
 import { COLORS as palette } from "../../utils/style/Color/colors";
+import Typography from "../../utils/style/Typography/index";
 
 const Container = styled.div`
   width: 100%;
