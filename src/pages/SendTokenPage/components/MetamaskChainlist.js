@@ -3652,6 +3652,119 @@ const Chainlist = [
     },
     __N_SSG: true,
   },
+  {
+    pageProps: {
+      chain: {
+        name: "Sepolia",
+        title: "Ethereum Testnet Sepolia",
+        chain: "ETH",
+        rpc: [
+          "https://rpc.sepolia.org",
+          "https://rpc2.sepolia.org",
+          "https://rpc-sepolia.rockx.com",
+        ],
+        faucets: [
+          "http://fauceth.komputing.org?chain=11155111&address=${ADDRESS}",
+        ],
+        nativeCurrency: {
+          name: "Sepolia Ether",
+          symbol: "ETH",
+          decimals: 18,
+        },
+        infoURL: "https://sepolia.otterscan.io",
+        shortName: "sep",
+        chainId: 11155111,
+        networkId: 11155111,
+        explorers: [
+          {
+            name: "etherscan-sepolia",
+            url: "https://sepolia.etherscan.io",
+            standard: "EIP3091",
+          },
+          {
+            name: "otterscan-sepolia",
+            url: "https://sepolia.otterscan.io",
+            standard: "EIP3091",
+          },
+        ],
+      },
+      messages: {
+        Common: {
+          "connect-wallet": "Connect Wallet",
+          "view-source-code": "View Code",
+          "join-our-discord": "Join Discord",
+          currency: "Currency",
+          "search-networks": "Search Networks",
+          description:
+            "Chainlist is a list of EVM networks. Users can use the information to connect their wallets and Web3 middleware providers to the appropriate Chain ID and Network ID to connect to the correct chain.",
+          "help-info": "Helping users connect to EVM powered networks",
+          "add-your-network": "Add Your Network",
+          "add-your-rpc": "Add Your RPC",
+          language: "中文",
+          "add-to-metamask": "Add to Metamask",
+          "add-to-imToken": "Add to imToken",
+          "add-to-wallet": "Add to Wallet",
+          "add-to-brave": "Add to Brave",
+          "add-to-coinbase": "Add to Coinbase Wallet",
+        },
+      },
+    },
+    __N_SSG: true,
+  },
+  {
+    pageProps: {
+      chain: {
+        name: "Mumbai",
+        title: "Polygon Testnet Mumbai",
+        chain: "Polygon",
+        icon: "polygon",
+        rpc: [
+          "https://matic-mumbai.chainstacklabs.com",
+          "https://rpc-mumbai.maticvigil.com",
+          "https://matic-testnet-archive-rpc.bwarelabs.com",
+          "https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78",
+        ],
+        faucets: ["https://faucet.polygon.technology/"],
+        nativeCurrency: {
+          name: "MATIC",
+          symbol: "MATIC",
+          decimals: 18,
+        },
+        infoURL: "https://polygon.technology/",
+        shortName: "maticmum",
+        chainId: 80001,
+        networkId: 80001,
+        explorers: [
+          {
+            name: "polygonscan",
+            url: "https://mumbai.polygonscan.com",
+            standard: "EIP3091",
+          },
+        ],
+      },
+      messages: {
+        Common: {
+          "connect-wallet": "Connect Wallet",
+          "view-source-code": "View Code",
+          "join-our-discord": "Join Discord",
+          currency: "Currency",
+          "search-networks": "Search Networks",
+          description:
+            "Chainlist is a list of EVM networks. Users can use the information to connect their wallets and Web3 middleware providers to the appropriate Chain ID and Network ID to connect to the correct chain.",
+          "help-info": "Helping users connect to EVM powered networks",
+          "add-your-network": "Add Your Network",
+          "add-your-rpc": "Add Your RPC",
+          language: "中文",
+          "add-to-metamask": "Add to Metamask",
+          "add-to-imToken": "Add to imToken",
+          "add-to-wallet": "Add to Wallet",
+          "add-to-brave": "Add to Brave",
+          "add-to-coinbase": "Add to Coinbase Wallet",
+        },
+      },
+    },
+    __N_SSG: true,
+  },
 ];
 
 export default Chainlist;

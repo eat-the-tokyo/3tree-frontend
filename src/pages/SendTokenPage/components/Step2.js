@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { bignumber, subtract } from "mathjs";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Typography from "../../../utils/style/Typography/index";
-import { COLORS as palette } from "../../../utils/style/Color/colors";
-import MetamaskChainList from "./MetamaskChainlist";
-import { MetamaskIcon } from "../../../assets/icons";
-import { DropIcon, InputHelp, InputError } from "../../../assets/icons";
+import { CheckSendModal, MobileNetworkBox, TokenBottomModal } from ".";
+import {
+  DropIcon,
+  InputError,
+  InputHelp,
+  MetamaskIcon,
+} from "../../../assets/icons";
 import { ContainedButton } from "../../../components/button";
 import { Tooltip } from "../../../components/card";
-import Chainlist from "../data/SimpleTokenList";
-import { bignumber, format, subtract } from "mathjs";
-import { useTranslation } from "react-i18next";
-import { MobileNetworkBox, TokenBottomModal, CheckSendModal, DropBox } from ".";
 import { ConfirmModal } from "../../../components/modal";
-import { useNavigate } from "react-router-dom";
+import { COLORS as palette } from "../../../utils/style/Color/colors";
+import Typography from "../../../utils/style/Typography/index";
+import Chainlist from "../data/SimpleTokenList";
+import MetamaskChainList from "./MetamaskChainlist";
 
 const Container = styled.div`
   width: 100%;
@@ -553,7 +557,12 @@ const Step2 = ({
 
         const currentNetwork = metamaskProvider.networkVersion;
         setNetworkId(currentNetwork);
-        if (currentNetwork == 5 || currentNetwork == 137) {
+        if (
+          currentNetwork == 5 ||
+          currentNetwork == 137 ||
+          currentNetwork == 11155111 ||
+          currentNetwork == 80001
+        ) {
           // 현재 지원하는 네트워크 유효성 검사
           setNetwork(
             MetamaskChainList[
@@ -569,7 +578,12 @@ const Step2 = ({
         metamaskProvider.on("chainChanged", function (chainId) {
           // Time to reload your interface with accounts[0]!
           const decChainId = parseInt(chainId, 16);
-          if (decChainId == 5 || decChainId == 137) {
+          if (
+            decChainId == 5 ||
+            decChainId == 137 ||
+            decChainId == 11155111 ||
+            decChainId == 80001
+          ) {
             // 현재 지원하는 네트워크 유효성 검사
             setNetwork(
               MetamaskChainList[
