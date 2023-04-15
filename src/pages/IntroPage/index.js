@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -56,6 +56,10 @@ const IntroPage = () => {
       setLoginAlertModalVisible(true);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("language", "en");
+  });
 
   return (
     <>

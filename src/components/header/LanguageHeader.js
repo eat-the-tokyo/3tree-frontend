@@ -1,12 +1,11 @@
-import React from "react";
+import { createStore, useGlobalState } from "state-pool";
 import styled from "styled-components";
-import { useGlobalState, createStore } from "state-pool";
 
 const store = createStore();
 
 const Button = styled.button``;
 
-store.setState("language", { lang: "ko", id: 0 });
+store.setState("language", { lang: "en", id: 1 });
 const LanguageList = ["ko", "en"];
 
 const LanguageHeader = () => {
