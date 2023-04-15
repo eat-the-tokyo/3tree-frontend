@@ -86,3 +86,19 @@ export const checkWrapped = async (escrowId) => {
 
   return returnValue;
 };
+
+export const toggleWrapped = async (escrowId, toggleValue) => {
+  let returnValue;
+  await axios
+    .get(
+      `https://api.eattokyo.xyz/txn/toggle/wrapped?escrowId=${escrowId}&toggle=${toggleValue}`
+    )
+    .then((data) => {
+      returnValue = data.data.resultData;
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  return returnValue;
+};
